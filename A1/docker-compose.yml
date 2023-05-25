@@ -1,0 +1,24 @@
+services:
+  container_1:
+    container_name: container_1
+    image: kishoreganesh/container_1:image_1
+    ports:
+      - 6000:6000
+    networks:
+      - my-network
+    volumes:
+      - .:/my_files/
+
+  container_2:
+    container_name: container_2
+    image: kishoreganesh/container_2:image_2
+    ports:
+      - 8080:8080
+    networks:
+      - my-network
+    volumes:
+      - .:/my_files/
+
+networks:
+  my-network:
+    driver: bridge
