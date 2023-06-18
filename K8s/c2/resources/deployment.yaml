@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: combined-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: combined
+  template:
+    metadata:
+      labels:
+        app: combined
+    spec:
+      containers:
+        - name: container1
+          image: us-central1-docker.pkg.dev/b00934548-k8s/container1/code1
+          ports:
+            - containerPort: 6000
+          volumeMounts:
+            - name: shared-volume
+              mountPath: /kishoreganesh_PV_dir
+        - name: container2
+          image: us-central1-docker.pkg.dev/b00934548-k8s/container2/code2
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: shared-volume
+              mountPath: /kishoreganesh_PV_dir
+      volumes:
+        - name: shared-volume
+          persistentVolumeClaim:
+            claimName: shared-pvc-1

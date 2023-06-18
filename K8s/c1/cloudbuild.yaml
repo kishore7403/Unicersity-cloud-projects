@@ -1,0 +1,18 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/b00934548-k8s/container1/code1', './']
+  
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/b00934548-k8s/container1/code1']
+
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+      - 'run'
+      - '--filename=resources/'
+      - '--location=us-central1-c'
+      - '--cluster=cluster-1'
+
+substitutions:
+  _CLOUDSDK_COMPUTE_REGION: us-central1
+  _CLOUDSDK_COMPUTE_ZONE: us-central1-c
+  _CLOUDSDK_CONTAINER_CLUSTER: cluster-1
