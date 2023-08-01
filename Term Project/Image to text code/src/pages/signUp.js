@@ -16,7 +16,7 @@ const SignUpPage = () => {
       return;
     }
 
-    fetch("https://9uo2xn0fi5.execute-api.us-east-1.amazonaws.com/production/signin", {
+    fetch(process.env.REACT_APP_API_URL_1, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
